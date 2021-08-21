@@ -1,0 +1,26 @@
+name: corex
+description: A new Flutter package project.
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  device_info: ^2.0.2
+  package_info: ^2.0.2
+  shared_preferences: ^2.0.6
+  uuid: ^3.0.4
+  dio: ^4.0.0
+  json_annotation: ^4.0.1
+  provider: ^6.0.0
+  url_launcher: ^6.0.9
+  flutter_markdown: ^0.6.4
+  markdown: ^4.0.0
+  mqtt:
+    git:
+      url: git@gitlab.me:flutter/mqtt.git
+      ref: tags/v1.0.2
