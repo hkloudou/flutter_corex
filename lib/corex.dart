@@ -7,7 +7,7 @@ export 'src/config.dart' show EConfig, EColor;
 export 'src/ext.dart' show DoubleFix, MyIterable;
 
 export 'src/router.dart' show showAnimatePage;
-
+export 'src/WiseLaunchAdapter.dart' show WiseLaunchAdapter;
 //Status
 export 'src/status/status.dart' show providers;
 export 'src/status/AuthStatus.dart';
