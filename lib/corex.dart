@@ -4,10 +4,18 @@ export 'src/deviceinfo.dart' show deviceID;
 export 'src/packageinfo.dart' show packageInfo;
 export 'src/config.dart' show EConfig, EColor;
 
+//ext
 export 'src/ext.dart' show DoubleFix, MyIterable;
 
+//router
 export 'src/router.dart' show showAnimatePage;
+
+//launch
 export 'src/WiseLaunchAdapter.dart' show WiseLaunchAdapter;
+
+//ui
+export 'src/ui.dart' show alert, showProgress, hideProgress;
+
 //Status
 export 'src/status/status.dart' show providers;
 export 'src/status/AuthStatus.dart';
