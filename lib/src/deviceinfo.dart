@@ -10,6 +10,7 @@ String _deviceID = "";
 final DeviceInfoPlugin _deviceInfoPlugin = DeviceInfoPlugin();
 
 Future<void> initDeviceID() async {
+  print("corex:initDeviceID");
   try {
     if (Platform.isAndroid) {
       var andinfo = (await _deviceInfoPlugin.androidInfo);
@@ -18,12 +19,14 @@ Future<void> initDeviceID() async {
       _deviceID = (await _deviceInfoPlugin.iosInfo).identifierForVendor;
     }
   } on PlatformException catch (err) {
-    print("initPlatformState:${err.toString()}");
+    print("corex:initPlatformState:${err.toString()}");
+  } catch (err) {
+    print("corex:initDeviceID err: $err");
   }
+  print("corex:_deviceID:$_deviceID");
   if (_deviceID == "") {
     return SharedPreferences.getInstance().then((hand) {
-      // PackageInfo.
-      // pack
+      print("corex:_deviceID hand");
       var key = packageInfo.packageName + "/deviceID";
       String value = hand.getString(key) ?? "";
       if (value.isEmpty) {
