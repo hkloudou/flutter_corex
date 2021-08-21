@@ -26,14 +26,14 @@ showAnimatePage(BuildContext context, Widget widget,
   }
 }
 
-Future<String> Function({String url, CancelToken? cancelToken})
-    onOpanMakeDoenRemotePage =
-    ({String url = "", CancelToken? cancelToken}) => Future.error("未初始化");
-void registerMarkDownOpenRemotePageHandle(
-    Future<String> Function({
-  String url,
-  CancelToken? cancelToken,
-})
-        fun) {
-  onOpanMakeDoenRemotePage = fun;
-}
+// Future<String> Function({String url, CancelToken? cancelToken})
+//     onOpanMakeDoenRemotePage =
+//     ({String url = "", CancelToken? cancelToken}) => Future.error("未初始化");
+// void registerMarkDownOpenRemotePageHandle(
+//     Future<String> Function({
+//   String url,
+//   CancelToken? cancelToken,
+// })
+//         fun) {
+//   onOpanMakeDoenRemotePage = fun;
+// }

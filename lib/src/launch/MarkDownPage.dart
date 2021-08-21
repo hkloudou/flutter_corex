@@ -161,11 +161,14 @@ class _MarkDownPageState extends State<MarkDownPage> {
       obj = RefreshIndicator(
         key: _refreshKey,
         // onRefresh: null,
-        onRefresh: () => onOpanMakeDoenRemotePage(
-          url: widget.url,
-          cancelToken: _cancelToken,
-          // refreshKey: _refreshKey,
-        ).then((value) {
+        onRefresh: () => DioAdapter()
+            .openPage(widget.url, cancelToken: _cancelToken, sign: false)
+            .catchError((err) {
+          if (_refreshKey.currentContext != null) {
+            alert(_refreshKey.currentContext!, err.toString(),
+                cb: () => Navigator.of(_refreshKey.currentContext!).pop());
+          }
+        }).then((value) {
           if (mounted && !_cancelToken.isCancelled) {
             setState(() {
               _con = value;

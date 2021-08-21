@@ -9,6 +9,7 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:url_launcher/url_launcher.dart';
 import './router.dart';
 import './ui.dart';
+import './DioAdapter.dart';
 part 'launch/LaunchAdapter.dart';
 part 'launch/MarkDownPage.dart';
 
