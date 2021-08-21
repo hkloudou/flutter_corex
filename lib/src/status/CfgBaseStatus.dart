@@ -19,14 +19,6 @@ class CfgBaseStatus with ChangeNotifier {
     return _config != null;
   }
 
-  // set config(CfgBase? obj) {
-  //   _config = obj;
-  //   if (hasListeners) {
-  //     notifyListeners();
-  //   }
-  // }
-
-  //isProductEnv 是生产环境
   bool get isProductEnv {
     return bool.fromEnvironment("dart.vm.product");
   }
@@ -142,15 +134,16 @@ class CfgBaseStatus with ChangeNotifier {
     return items[0];
   }
 
-  Future<void> init() async {
+  Future<void> init({bool notifySame = false}) async {
     Completer com = Completer();
     mqtt.MessageUtils.wsSub(
         "$EConfig.CONFIG_PNAME/c/$EConfig.CONFIG_SIMPLE_BASE_KEY", (msg) {
       try {
         var __config =
             CfgBase.fromJson(json.decode(utf8.decode(gzip.decode(msg))));
-        if (json.encode(__config).toString() !=
-            json.encode(_config).toString()) {
+        if (notifySame ||
+            json.encode(__config).toString() !=
+                json.encode(_config).toString()) {
           _config = __config;
           if (hasListeners) {
             notifyListeners();

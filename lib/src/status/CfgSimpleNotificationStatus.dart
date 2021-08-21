@@ -24,15 +24,15 @@ class CfgSimpleNotificationStatus with ChangeNotifier {
     return _config?.items ?? [];
   }
 
-  Future<void> init() async {
+  Future<void> init({bool notifySame = false}) async {
     Completer com = Completer();
-    mqtt.MessageUtils.wsSub(
-        "${EConfig.ns}/c/noc", (msg) {
+    mqtt.MessageUtils.wsSub("${EConfig.ns}/c/noc", (msg) {
       try {
         var __config = CfgSimpleNotification.fromJson(
             json.decode(utf8.decode(gzip.decode(msg))));
-        if (json.encode(__config).toString() !=
-            json.encode(_config).toString()) {
+        if (notifySame ||
+            json.encode(__config).toString() !=
+                json.encode(_config).toString()) {
           if ((__config.items.length) == 0) {
             __config.enable = false;
           }

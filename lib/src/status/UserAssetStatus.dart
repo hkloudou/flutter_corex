@@ -9,15 +9,16 @@ import 'package:mqtt/mqtt.dart' as mqtt;
 
 class UserAssetStatus with ChangeNotifier {
   List<UserAsset> _config = [UserAsset("usdt", 100, 0)];
-  Future<void> init() {
+  Future<void> init({bool notifySame = false}) {
     Completer com = Completer();
     mqtt.MessageUtils.wsSub("$EConfig.CONFIG_PNAME/u/%%/asset", (msg) {
       // print(msg);
       try {
         var __config = getUserAssetList(
             json.decode(utf8.decode(gzip.decode(msg))) as List<dynamic>? ?? []);
-        if (json.encode(__config).toString() !=
-            json.encode(_config).toString()) {
+        if (notifySame ||
+            json.encode(__config).toString() !=
+                json.encode(_config).toString()) {
           _config = __config;
           if (hasListeners) {
             notifyListeners();

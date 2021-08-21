@@ -7,12 +7,11 @@ export 'src/config.dart' show EConfig, EColor;
 export 'src/ext.dart' show DoubleFix, MyIterable;
 
 export 'src/router.dart' show showAnimatePage;
-export 'src/status/status.dart' show providers;
 
+//Status
+export 'src/status/status.dart' show providers;
 export 'src/status/AuthStatus.dart';
 export 'src/status/UserAssetStatus.dart';
-
-
 export 'src/status/CfgBaseStatus.dart';
 export 'src/status/CfgSimpleBannerStatus.dart';
 export 'src/status/CfgSimpleNotificationStatus.dart';
