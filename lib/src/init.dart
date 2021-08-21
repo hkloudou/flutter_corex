@@ -1,12 +1,9 @@
 import 'package:corex/corex.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import './config.dart';
 import './deviceinfo.dart';
 import './packageinfo.dart';
-import './ui.dart';
-import './DioAdapter.dart';
 import './MQTTAdapter.dart';
 import './HttpJsonPackage.dart';
 import './status/AuthStatus.dart';
@@ -26,7 +23,7 @@ Future<void> _loadUiBoxMqttSubcribe(BuildContext context) {
   });
 }
 
-Future<void> initCore(BuildContext context, String mqttUrl,
+Future<void> initCoreX(BuildContext context, String mqttUrl,
     {String? nameSpace, bool? signMarddownRequest}) {
   if (nameSpace != null) {
     EConfig.ns = nameSpace;

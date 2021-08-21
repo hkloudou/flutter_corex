@@ -34,3 +34,5 @@ export 'src/HttpJsonPackage.dart' show HttpJsonPackage,addJsonHandle;
 //entity
 export 'src/entrys/asset_history.dart' show AssetHistory;
 
+//init
+export 'src/init.dart' show initCoreX; 
