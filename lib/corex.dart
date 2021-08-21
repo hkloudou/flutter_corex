@@ -15,3 +15,8 @@ export 'src/status/UserAssetStatus.dart';
 export 'src/status/CfgBaseStatus.dart';
 export 'src/status/CfgSimpleBannerStatus.dart';
 export 'src/status/CfgSimpleNotificationStatus.dart';
+
+//Util
+export 'src/DioAdapter.dart' show DioAdapter;
+export 'src/MQTTAdaper.dart' show MQTTAdapter;
+export 'src/HttpJsonPackage.dart' show HttpJsonPackage;
