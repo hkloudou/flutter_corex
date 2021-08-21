@@ -1,5 +1,7 @@
 library corex;
 
+import 'package:flutter/material.dart';
+
 export 'src/deviceinfo.dart' show deviceID;
 export 'src/packageinfo.dart' show packageInfo;
 export 'src/config.dart' show EConfig, EColor;
@@ -26,9 +28,9 @@ export 'src/status/CfgSimpleNotificationStatus.dart';
 
 //Util
 export 'src/DioAdapter.dart' show DioAdapter;
-export 'src/MQTTAdaper.dart' show MQTTAdapter;
-export 'src/HttpJsonPackage.dart' show HttpJsonPackage;
-
+export 'src/MQTTAdapter.dart' show MQTTAdapter;
+export 'src/HttpJsonPackage.dart' show HttpJsonPackage,addJsonHandle;
 
 //entity
 export 'src/entrys/asset_history.dart' show AssetHistory;
+
