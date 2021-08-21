@@ -28,3 +28,7 @@ export 'src/status/CfgSimpleNotificationStatus.dart';
 export 'src/DioAdapter.dart' show DioAdapter;
 export 'src/MQTTAdaper.dart' show MQTTAdapter;
 export 'src/HttpJsonPackage.dart' show HttpJsonPackage;
+
+
+//entity
+export 'src/entrys/asset_history.dart' show AssetHistory;
