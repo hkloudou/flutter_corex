@@ -11,7 +11,7 @@ class UserAssetStatus with ChangeNotifier {
   List<UserAsset> _config = [UserAsset("usdt", 100, 0)];
   Future<void> init({bool notifySame = false}) {
     Completer com = Completer();
-    mqtt.MessageUtils.wsSub("$EConfig.CONFIG_PNAME/u/%%/asset", (msg) {
+    mqtt.MessageUtils.wsSub("${EConfig.ns}/u/%%/asset", (msg) {
       // print(msg);
       try {
         var __config = getUserAssetList(

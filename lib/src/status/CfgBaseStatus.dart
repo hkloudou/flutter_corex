@@ -137,7 +137,7 @@ class CfgBaseStatus with ChangeNotifier {
   Future<void> init({bool notifySame = false}) async {
     Completer com = Completer();
     mqtt.MessageUtils.wsSub(
-        "$EConfig.CONFIG_PNAME/c/$EConfig.CONFIG_SIMPLE_BASE_KEY", (msg) {
+        "${EConfig.ns}/c/base", (msg) {
       try {
         var __config =
             CfgBase.fromJson(json.decode(utf8.decode(gzip.decode(msg))));

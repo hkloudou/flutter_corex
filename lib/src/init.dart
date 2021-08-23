@@ -55,6 +55,9 @@ Future<void> initCoreX(BuildContext context, String mqttUrl,
   EConfig.mqttServer = mqttUrl;
 
   return Future.wait([initDeviceID(), initPackageInfo()])
+      .then((_) {
+        print("corex:load");
+      })
       .then((_) => MQTTAdapter.init())
       .then((_) => _loadUiBoxMqttSubcribe(context));
 }
