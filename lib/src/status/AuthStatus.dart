@@ -90,15 +90,14 @@ class AuthStatus with ChangeNotifier {
     });
   }
 
-  Future<void> login(String userName, Uint8List token,
-      {String code = ""}) async {
+  Future<void> login(String userName, Uint8List token, {String? code}) async {
     return SharedPreferences.getInstance()
         .then((hand) => Future.wait([
               hand.setString(
                   packageInfo.packageName + "/lt_userName", userName),
               hand.setString(
                   packageInfo.packageName + "/lt_token", base64Encode(token)),
-              hand.setString(packageInfo.packageName + "/lt_code", code)
+              hand.setString(packageInfo.packageName + "/lt_code", code ?? ""),
             ]).then((_) {
               EConfig.onMQTTChanged?.call();
             }).then((_) {
