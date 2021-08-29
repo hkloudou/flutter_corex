@@ -24,7 +24,10 @@ Future<void> _loadUiBoxMqttSubcribe(BuildContext context) {
 }
 
 Future<void> initCoreX(BuildContext context, String mqttUrl,
-    {String? nameSpace, bool? signMarddownRequest}) {
+    {String? nameSpace,
+    bool? signMarddownRequest,
+    bool useSimpleNotification = true,
+    bool useSimpleBanner = true}) {
   if (nameSpace != null) {
     EConfig.ns = nameSpace;
   }
@@ -53,12 +56,21 @@ Future<void> initCoreX(BuildContext context, String mqttUrl,
   addJsonHandle<AssetHistory>((obj) => obj);
   //
   EConfig.mqttServer = mqttUrl;
-
+  // context.read<CfgSimpleNotificationStatus>().init();
+  // context.read<CfgSimpleBannerStatus>().init();
   return initPackageInfo()
       .then((_) => initDeviceID())
       .then((_) {
         print("corex:load");
       })
       .then((_) => MQTTAdapter.init())
-      .then((_) => _loadUiBoxMqttSubcribe(context));
+      .then((_) => _loadUiBoxMqttSubcribe(context))
+      .then((_) {
+        if (useSimpleNotification) {
+          context.read<CfgSimpleNotificationStatus>().init();
+        }
+        if (useSimpleBanner) {
+          context.read<CfgSimpleBannerStatus>().init();
+        }
+      });
 }
