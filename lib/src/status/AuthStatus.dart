@@ -103,6 +103,7 @@ class AuthStatus with ChangeNotifier {
             }).then((_) {
               _userName = userName;
               _token = token;
+              _code = code;
               return mqtt.MessageUtils.closeSocket(); //登陆成功，关闭链接重连
             }))
         .whenComplete(() {
