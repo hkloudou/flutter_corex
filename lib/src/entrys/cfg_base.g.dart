@@ -13,9 +13,9 @@ CfgBase _$CfgBaseFromJson(Map json) {
                 (e) => CfgServer.fromJson(Map<String, dynamic>.from(e as Map)))
             .toList() ??
         [],
-    promotion: (json['promotion'] as List<dynamic>?)
+    promotions: (json['promotions'] as List<dynamic>?)
             ?.map((e) =>
-                CfgPromotion.fromJson(Map<String, dynamic>.from(e as Map)))
+                CfgPromotionPost.fromJson(Map<String, dynamic>.from(e as Map)))
             .toList() ??
         [],
     update:
@@ -30,7 +30,7 @@ CfgBase _$CfgBaseFromJson(Map json) {
 
 Map<String, dynamic> _$CfgBaseToJson(CfgBase instance) => <String, dynamic>{
       'servers': instance.servers,
-      'promotion': instance.promotion,
+      'promotions': instance.promotions,
       'update': instance.update,
       'chains': instance.chains,
     };

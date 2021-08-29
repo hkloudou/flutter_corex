@@ -19,6 +19,10 @@ class CfgBaseStatus with ChangeNotifier {
     return _config != null;
   }
 
+  CfgBase? get config {
+    return _config;
+  }
+
   bool get isProductEnv {
     return bool.fromEnvironment("dart.vm.product");
   }
@@ -136,8 +140,7 @@ class CfgBaseStatus with ChangeNotifier {
 
   Future<void> init({bool notifySame = false}) async {
     Completer com = Completer();
-    mqtt.MessageUtils.wsSub(
-        "${EConfig.ns}/c/base", (msg) {
+    mqtt.MessageUtils.wsSub("${EConfig.ns}/c/base", (msg) {
       try {
         var __config =
             CfgBase.fromJson(json.decode(utf8.decode(gzip.decode(msg))));

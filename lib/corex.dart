@@ -32,7 +32,7 @@ export 'src/HttpJsonPackage.dart' show HttpJsonPackage, addJsonHandle;
 //entity
 export 'src/entrys/asset_history.dart' show AssetHistory;
 
-export 'src/entrys/cfg_promotion.dart' show CfgPromotion;
+export 'src/entrys/cfg_promotion_post.dart' show CfgPromotionPost;
 
 //init
 export 'src/init.dart' show initCoreX;

@@ -1,4 +1,4 @@
-import 'package:corex/src/entrys/cfg_promotion.dart';
+import 'package:corex/src/entrys/cfg_promotion_post.dart';
 import 'package:json_annotation/json_annotation.dart';
 import './cfg_server.dart';
 import './cfg_update.dart';
@@ -11,7 +11,7 @@ class CfgBase {
   final List<CfgServer> servers;
 
   @JsonKey(defaultValue: [])
-  final List<CfgPromotion> promotion;
+  final List<CfgPromotionPost> promotions;
 
   @JsonKey()
   final CfgUpdate update;
@@ -23,7 +23,7 @@ class CfgBase {
 
   CfgBase(
       {required this.servers,
-      required this.promotion,
+      required this.promotions,
       required this.update,
       required this.chains});
   factory CfgBase.fromJson(Map<String, dynamic> json) =>
