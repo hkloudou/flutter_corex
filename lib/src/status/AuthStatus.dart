@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthStatus with ChangeNotifier {
   static String? _userName;
+  static String? _code;
   static Uint8List? _token;
   static AuthStatus? _last;
 
@@ -16,6 +17,10 @@ class AuthStatus with ChangeNotifier {
   }
   String get userName {
     return _userName ?? "";
+  }
+
+  String get code {
+    return _code ?? "";
   }
 
   Uint8List get token {
@@ -46,9 +51,11 @@ class AuthStatus with ChangeNotifier {
       return Future.wait([
         hand.remove(packageInfo.packageName + "/lt_userName"),
         hand.remove(packageInfo.packageName + "/lt_token"),
+        hand.remove(packageInfo.packageName + "/lt_code"),
       ]).then((_) {
         _userName = null;
         _token = null;
+        _code = null;
         return mqtt.MessageUtils.closeSocket(); //关闭socker来自动重制数据
       }).catchError((err) {
         print("loginOut error:${err.toString()}");
@@ -65,6 +72,7 @@ class AuthStatus with ChangeNotifier {
         var key = packageInfo.packageName + "/lt_token";
         _userName =
             hand.getString(packageInfo.packageName + "/lt_userName") ?? "";
+        _code = hand.getString(packageInfo.packageName + "/lt_code") ?? "";
         _token = base64Decode(hand.getString(key) ?? "");
         if (_token != null && _token!.length < 10) {
           _token = null;
@@ -72,21 +80,25 @@ class AuthStatus with ChangeNotifier {
       } catch (e) {
         _userName = null;
         _token = null;
+        _code = null;
       }
       return Future.value();
     }).catchError((_) {
       _userName = null;
       _token = null;
+      _code = null;
     });
   }
 
-  Future<void> login(String userName, Uint8List token) async {
+  Future<void> login(String userName, Uint8List token,
+      {String code = ""}) async {
     return SharedPreferences.getInstance()
         .then((hand) => Future.wait([
               hand.setString(
                   packageInfo.packageName + "/lt_userName", userName),
               hand.setString(
-                  packageInfo.packageName + "/lt_token", base64Encode(token))
+                  packageInfo.packageName + "/lt_token", base64Encode(token)),
+              hand.setString(packageInfo.packageName + "/lt_code", code)
             ]).then((_) {
               EConfig.onMQTTChanged?.call();
             }).then((_) {
