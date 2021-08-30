@@ -11,7 +11,7 @@ class UserAssetStatus with ChangeNotifier {
   UserAssetStatus() {
     _last = this;
   }
-  List<UserAsset> _config = [];
+  List<UserAsset>? _config = [];
   bool _ready = false;
   static UserAssetStatus? _last;
   Future<void> init({bool notifySame = false}) {
@@ -26,12 +26,12 @@ class UserAssetStatus with ChangeNotifier {
             json.encode(__config).toString() !=
                 json.encode(_config).toString()) {
           _config = __config;
+          _ready = true;
           if (hasListeners) {
             notifyListeners();
           }
         }
-        _ready = true;
-        // print("__config:$__config");
+        print("__config:$__config");
         if (!com.isCompleted) {
           com.complete();
         }
@@ -44,17 +44,17 @@ class UserAssetStatus with ChangeNotifier {
 
   bool get ready => _ready;
   UserAsset? get usdt {
-    return _config.firstWhereOrNull(
+    return (_config ?? []).firstWhereOrNull(
         (e) => e.asset.toLowerCase() == "usdt" && e.group == 0);
   }
 
   UserAsset? getAsset(String asset, int group) {
-    return _config.firstWhereOrNull((e) =>
+    return (_config ?? []).firstWhereOrNull((e) =>
         e.asset.toLowerCase() == asset.toLowerCase() && e.group == group);
   }
 
   List<UserAsset> get config {
-    return _config;
+    return _config ?? [];
   }
 
   void notifyChange() {
@@ -64,7 +64,7 @@ class UserAssetStatus with ChangeNotifier {
   }
 
   static void loginOutStatic() {
-    _last?._config = [];
+    _last?._config = null;
     _last?._ready = false;
   }
 }
