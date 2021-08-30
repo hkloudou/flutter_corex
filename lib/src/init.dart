@@ -23,7 +23,7 @@ Future<void> _loadUiBoxMqttSubcribe(BuildContext context) {
   });
 }
 
-Future<void> initCoreX(BuildContext context, String mqttUrl,
+Future<void> initCoreX(BuildContext context, List<String> mqttUrl,
     {String? nameSpace,
     bool? signMarddownRequest,
     bool useSimpleNotification = true,

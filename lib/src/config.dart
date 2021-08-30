@@ -7,7 +7,7 @@ typedef MarkDownCallBack = Future<String> Function(
 class EConfig {
   // static Map<String,>
   static String ns = "test";
-  static String mqttServer = "ws://127.0.0.1:9094/ws";
+  static List<String> mqttServer = ["ws://127.0.0.1:9094/ws"];
   static VoidCallback? onMQTTChanged;
   static Future<String> Function({String url, CancelToken? cancelToken})?
       diomarkdown;

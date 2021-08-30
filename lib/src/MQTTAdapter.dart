@@ -1,5 +1,6 @@
 //System
 import 'dart:async';
+import 'dart:math';
 
 //Third Part
 import 'package:corex/corex.dart';
@@ -40,7 +41,10 @@ class MQTTAdapter {
 
   static void reConnect() {
     setAuthInfo();
-    mqtt.MessageUtils.connect(EConfig.mqttServer, re: true);
+    mqtt.MessageUtils.connect(
+        EConfig.mqttServer
+            .elementAt(new Random().nextInt(EConfig.mqttServer.length)),
+        re: true);
   }
 
   static void closeSocket() {
