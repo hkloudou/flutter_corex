@@ -12,7 +12,7 @@ class UserAssetStatus with ChangeNotifier {
     _last = this;
   }
   List<UserAsset> _config = [];
-  bool ready = false;
+  bool _ready = false;
   static UserAssetStatus? _last;
   Future<void> init({bool notifySame = false}) {
     Completer com = Completer();
@@ -30,6 +30,7 @@ class UserAssetStatus with ChangeNotifier {
             notifyListeners();
           }
         }
+        _ready = true;
         // print("__config:$__config");
         if (!com.isCompleted) {
           com.complete();
@@ -41,6 +42,7 @@ class UserAssetStatus with ChangeNotifier {
     return com.future;
   }
 
+  bool get ready => _ready;
   UserAsset? get usdt {
     return _config.firstWhereOrNull(
         (e) => e.asset.toLowerCase() == "usdt" && e.group == 0);
@@ -63,6 +65,6 @@ class UserAssetStatus with ChangeNotifier {
 
   static void loginOutStatic() {
     _last?._config = [];
-    _last?.ready = false;
+    _last?._ready = false;
   }
 }
