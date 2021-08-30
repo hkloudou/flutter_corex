@@ -54,8 +54,7 @@ Future<void> initCoreX(BuildContext context, String mqttUrl,
   addJsonHandle<Map<String, dynamic>>((obj) => obj ?? {});
   addJsonHandle<Map<String, dynamic>?>((obj) => obj);
   addJsonHandle<AssetHistory>((obj) {
-    // print("objx:$obj:");
-    // print("objx2:${AssetHistory.fromJson(obj)}");
+    // as Map 这部分语法很关键
     return AssetHistory.fromJson(obj as Map<String, dynamic>);
   });
   //

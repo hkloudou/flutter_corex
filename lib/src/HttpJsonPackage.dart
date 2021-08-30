@@ -21,11 +21,7 @@ class _ConverterData<T> implements JsonConverter<T, Map<String, dynamic>> {
   const _ConverterData();
   @override
   T fromJson(dynamic json) {
-    print("json: $json");
     if (_jsonHandlerCallBackMap.containsKey(T.hashCode)) {
-      print("containsKey3: ${T.toString()}");
-
-      // print("func:${_jsonHandlerCallBackMap[T.hashCode]}");
       return _jsonHandlerCallBackMap[T.hashCode]!(json) as T;
     }
     if (_typeOf<T>().hashCode == _typeOf<Map<String, dynamic>>().hashCode) {
