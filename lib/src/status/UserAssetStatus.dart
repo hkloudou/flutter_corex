@@ -19,7 +19,7 @@ class UserAssetStatus with ChangeNotifier {
     mqtt.MessageUtils.wsSub("${EConfig.ns}/u/%%/asset", (msg) {
       // print(msg);
       try {
-        // print("arr");
+        print("资金数据到达");
         var __config = getUserAssetList(
             json.decode(utf8.decode(gzip.decode(msg))) as List<dynamic>? ?? []);
         if (notifySame ||
