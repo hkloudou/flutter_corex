@@ -18,6 +18,9 @@ class UserAsset extends Object {
   @JsonKey(defaultValue: "")
   String asset;
 
+  @JsonKey(defaultValue: 0)
+  int group;
+
   @JsonKey(fromJson: _fromJsonDecimalTodouble)
   double free;
 
@@ -26,6 +29,7 @@ class UserAsset extends Object {
 
   UserAsset(
     this.asset,
+    this.group,
     this.free,
     this.locked,
   );

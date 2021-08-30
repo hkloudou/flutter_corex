@@ -8,12 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:mqtt/mqtt.dart' as mqtt;
 
 class UserAssetStatus with ChangeNotifier {
-  List<UserAsset> _config = [UserAsset("usdt", 100, 0)];
+  UserAssetStatus() {
+    _last = this;
+  }
+  List<UserAsset> _config = [];
+  bool ready = false;
+  static UserAssetStatus? _last;
   Future<void> init({bool notifySame = false}) {
     Completer com = Completer();
     mqtt.MessageUtils.wsSub("${EConfig.ns}/u/%%/asset", (msg) {
       // print(msg);
       try {
+        // print("arr");
         var __config = getUserAssetList(
             json.decode(utf8.decode(gzip.decode(msg))) as List<dynamic>? ?? []);
         if (notifySame ||
@@ -24,6 +30,7 @@ class UserAssetStatus with ChangeNotifier {
             notifyListeners();
           }
         }
+        // print("__config:$__config");
         if (!com.isCompleted) {
           com.complete();
         }
@@ -35,7 +42,13 @@ class UserAssetStatus with ChangeNotifier {
   }
 
   UserAsset? get usdt {
-    return _config.firstWhereOrNull((e) => e.asset.toLowerCase() == "usdt");
+    return _config.firstWhereOrNull(
+        (e) => e.asset.toLowerCase() == "usdt" && e.group == 0);
+  }
+
+  UserAsset? getAsset(String asset, int group) {
+    return _config.firstWhereOrNull((e) =>
+        e.asset.toLowerCase() == asset.toLowerCase() && e.group == group);
   }
 
   List<UserAsset> get config {
@@ -46,5 +59,10 @@ class UserAssetStatus with ChangeNotifier {
     if (hasListeners) {
       notifyListeners();
     }
+  }
+
+  static void loginOutStatic() {
+    _last?._config = [];
+    _last?.ready = false;
   }
 }

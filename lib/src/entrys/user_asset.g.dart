@@ -9,6 +9,7 @@ part of 'user_asset.dart';
 UserAsset _$UserAssetFromJson(Map json) {
   return UserAsset(
     json['asset'] as String? ?? '',
+    json['group'] as int? ?? 0,
     _fromJsonDecimalTodouble(json['free'] as String?),
     _fromJsonDecimalTodouble(json['locked'] as String?),
   );
@@ -16,6 +17,7 @@ UserAsset _$UserAssetFromJson(Map json) {
 
 Map<String, dynamic> _$UserAssetToJson(UserAsset instance) => <String, dynamic>{
       'asset': instance.asset,
+      'group': instance.group,
       'free': instance.free,
       'locked': instance.locked,
     };

@@ -2,6 +2,7 @@
 import 'dart:async';
 
 //Third Part
+import 'package:corex/corex.dart';
 import 'package:mqtt/mqtt.dart' as mqtt;
 
 //Self
@@ -20,6 +21,7 @@ class MQTTAdapter {
 
   static void reset() {
     // onMQTTChanged
+    UserAssetStatus.loginOutStatic();
     EConfig.onMQTTChanged?.call();
   }
 
@@ -55,9 +57,10 @@ class MQTTAdapter {
       if (ret == mqtt.MqttConnectReturnCode.badUsernameOrPassword) {
         AuthStatus.loginOutStatic();
         print("loginOut");
-      } else {
-        EConfig.onMQTTChanged?.call();
       }
+      /*else {
+        EConfig.onMQTTChanged?.call();
+      }*/
       // print("data reset");
       mqtt.MessageUtils.subAllUnfinished();
     };
