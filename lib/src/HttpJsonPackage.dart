@@ -64,7 +64,7 @@ class HttpJsonPackage<T> {
   static Type _typeOf<T>() => T;
   @override
   factory HttpJsonPackage.fromJson(Map<String, dynamic>? json) {
-    print("fromJson");
+    // 读取原生包，然后用兼容模式吧
     var code = json?['c'] as int? ??
         json?['C'] as int? ??
         json?['code'] as int? ??
@@ -76,12 +76,16 @@ class HttpJsonPackage<T> {
         json?['msg'] as String? ??
         json?['Msg'] as String? ??
         json?['MSG'] as String? ??
+        json?['message'] as String? ??
+        json?['Message'] as String? ??
+        json?['MSSSAGE'] as String? ??
         "";
-    print("containsKey1: ${T.toString()}");
+    // 如果是空的话，就返回空就好
     if (code != 0 || _typeOf<T>().hashCode == _typeOf<void>().hashCode) {
       return HttpJsonPackage<T>(code, msg, null);
     }
-    print("containsKey2: ${T.toString()}");
+
+    //对data进行解析
     return HttpJsonPackage<T>(
       code,
       msg,
@@ -89,7 +93,7 @@ class HttpJsonPackage<T> {
           json?['D'] ??
           json?['data'] ??
           json?['Data'] ??
-          json?['DATW']),
+          json?['DATA']),
     );
   }
 
