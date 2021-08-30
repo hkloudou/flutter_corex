@@ -188,7 +188,7 @@ class DioAdapter {
         return Future.value(HttpJsonPackage<T>.error(
             (res.statusCode) ?? -2, getErrors(res.statusCode ?? 0)));
       }
-      print("res.data:${res.data}");
+      // print("res.data:${res.data}");
       var ret = HttpJsonPackage<T>.fromJson(res.data as Map<String, dynamic>?);
       if (ret.code != 0) {
         return Future.value(HttpJsonPackage<T>.error(ret.code, ret.msg));

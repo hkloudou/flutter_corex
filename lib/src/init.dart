@@ -53,7 +53,11 @@ Future<void> initCoreX(BuildContext context, String mqttUrl,
   addJsonHandle<bool?>((obj) => obj);
   addJsonHandle<Map<String, dynamic>>((obj) => obj ?? {});
   addJsonHandle<Map<String, dynamic>?>((obj) => obj);
-  addJsonHandle<AssetHistory>((obj) => obj);
+  addJsonHandle<AssetHistory>((obj) {
+    // print("objx:$obj:");
+    // print("objx2:${AssetHistory.fromJson(obj)}");
+    return AssetHistory.fromJson(obj as Map<String, dynamic>);
+  });
   //
   EConfig.mqttServer = mqttUrl;
   // context.read<CfgSimpleNotificationStatus>().init();

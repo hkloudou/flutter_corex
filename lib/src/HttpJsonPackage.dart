@@ -5,9 +5,15 @@ Type _typeOf<T>() => T;
 
 var _jsonHandlerCallBackMap = Map<int, _JsonHandlerCallBack>();
 void addJsonHandle<T>(_JsonHandlerCallBack<T> handle) {
+  // print("T:${T.toString()}");
+  // print("T2:${_typeOf<T>().toString()}");
+  // print("List<T>:${_typeOf<List<T>>().toString()}");
+  // print(
+  //     "code:${_typeOf<T>().hashCode} List code:${_typeOf<List<T>>().hashCode}");
   _jsonHandlerCallBackMap[_typeOf<T>().hashCode] = handle;
   _jsonHandlerCallBackMap[_typeOf<List<T>>().hashCode] = ((dynamic obj) {
-    return (obj as List<dynamic>?)?.map((e) => handle(e)).toList() ?? <T>[];
+    var x = (obj as List<dynamic>?)?.map((e) => handle(e)).toList() ?? [];
+    return x;
   });
 }
 
@@ -15,7 +21,11 @@ class _ConverterData<T> implements JsonConverter<T, Map<String, dynamic>> {
   const _ConverterData();
   @override
   T fromJson(dynamic json) {
+    print("json: $json");
     if (_jsonHandlerCallBackMap.containsKey(T.hashCode)) {
+      print("containsKey3: ${T.toString()}");
+
+      // print("func:${_jsonHandlerCallBackMap[T.hashCode]}");
       return _jsonHandlerCallBackMap[T.hashCode]!(json) as T;
     }
     if (_typeOf<T>().hashCode == _typeOf<Map<String, dynamic>>().hashCode) {
@@ -58,6 +68,7 @@ class HttpJsonPackage<T> {
   static Type _typeOf<T>() => T;
   @override
   factory HttpJsonPackage.fromJson(Map<String, dynamic>? json) {
+    print("fromJson");
     var code = json?['c'] as int? ??
         json?['C'] as int? ??
         json?['code'] as int? ??
@@ -70,9 +81,11 @@ class HttpJsonPackage<T> {
         json?['Msg'] as String? ??
         json?['MSG'] as String? ??
         "";
+    print("containsKey1: ${T.toString()}");
     if (code != 0 || _typeOf<T>().hashCode == _typeOf<void>().hashCode) {
       return HttpJsonPackage<T>(code, msg, null);
     }
+    print("containsKey2: ${T.toString()}");
     return HttpJsonPackage<T>(
       code,
       msg,
