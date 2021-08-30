@@ -258,13 +258,18 @@ class DioAdapter {
 
   Future<HttpJsonPackage<List<AssetHistory>>> assetHistory(
       int before, String filter,
-      {CancelToken? cancelToken}) async {
+      {group = 0, CancelToken? cancelToken}) async {
     return getRequest<List<AssetHistory>>(
-      "/asset",
-      "history",
+      "asset",
+      "/asset.his.pagebf",
       sign: true,
       cancelToken: cancelToken,
-      queryParameters: {"before": "$before", "psize": 20, "filter": filter},
+      queryParameters: {
+        "group": group,
+        "before": "$before",
+        "size": 20,
+        "filter": filter
+      },
       options: Options(
         responseType: ResponseType.json,
         contentType: ContentType.binary.toString(),
