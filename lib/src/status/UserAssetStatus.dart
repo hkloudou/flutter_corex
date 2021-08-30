@@ -33,7 +33,6 @@ class UserAssetStatus with ChangeNotifier {
             notifyListeners();
           }
         }
-        print("__config:$__config");
         if (!com.isCompleted) {
           com.complete();
         }
