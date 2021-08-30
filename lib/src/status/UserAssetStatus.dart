@@ -11,7 +11,7 @@ class UserAssetStatus with ChangeNotifier {
   UserAssetStatus() {
     _last = this;
   }
-  List<UserAsset>? _config = [];
+  List<UserAsset>? _config;
   bool _ready = false;
   static UserAssetStatus? _last;
   Future<void> init({bool notifySame = false}) {
@@ -19,14 +19,16 @@ class UserAssetStatus with ChangeNotifier {
     mqtt.MessageUtils.wsSub("${EConfig.ns}/u/%%/asset", (msg) {
       // print(msg);
       try {
-        print("资金数据到达");
+        // print("资金数据到达:${_config == null}");
         var __config = getUserAssetList(
             json.decode(utf8.decode(gzip.decode(msg))) as List<dynamic>? ?? []);
         if (notifySame ||
+            _config == null ||
             json.encode(__config).toString() !=
                 json.encode(_config).toString()) {
           _config = __config;
           _ready = true;
+          // print("资金数据到达READY");
           if (hasListeners) {
             notifyListeners();
           }
