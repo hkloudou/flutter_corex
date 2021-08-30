@@ -60,17 +60,15 @@ Future<void> initCoreX(BuildContext context, String mqttUrl,
   // context.read<CfgSimpleBannerStatus>().init();
   return initPackageInfo()
       .then((_) => initDeviceID())
-      .then((_) {
-        print("corex:load");
-      })
+      .then((_) => context.read<AuthStatus>().init())
       .then((_) => MQTTAdapter.init())
       .then((_) => _loadUiBoxMqttSubcribe(context))
       .then((_) {
-        if (useSimpleNotification) {
-          context.read<CfgSimpleNotificationStatus>().init();
-        }
-        if (useSimpleBanner) {
-          context.read<CfgSimpleBannerStatus>().init();
-        }
-      });
+    if (useSimpleNotification) {
+      context.read<CfgSimpleNotificationStatus>().init();
+    }
+    if (useSimpleBanner) {
+      context.read<CfgSimpleBannerStatus>().init();
+    }
+  });
 }
