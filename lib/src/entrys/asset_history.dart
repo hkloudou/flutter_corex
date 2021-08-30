@@ -18,9 +18,14 @@ class AssetHistory {
   @JsonKey(defaultValue: 0)
   final int iD;
   @JsonKey(defaultValue: "")
-  final String name;
+  final String asset;
+
+  @JsonKey(defaultValue: 0)
+  final int group;
+
   @JsonKey(defaultValue: "")
   final String reson;
+
   @JsonKey(defaultValue: "")
   final String amount;
 
@@ -34,7 +39,8 @@ class AssetHistory {
   final Map<String, dynamic> meta;
   AssetHistory({
     required this.iD,
-    required this.name,
+    required this.asset,
+    required this.group,
     required this.amount,
     required this.reson,
     required this.step,
