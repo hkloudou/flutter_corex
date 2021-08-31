@@ -261,7 +261,7 @@ class DioAdapter {
       int before, String filter,
       {group = 0, CancelToken? cancelToken}) async {
     return getRequest<List<AssetHistory>>(
-      "asset",
+      "system",
       "/asset.his.pagebf",
       sign: true,
       cancelToken: cancelToken,
