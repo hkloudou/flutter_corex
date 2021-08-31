@@ -180,7 +180,7 @@ class DioAdapter {
         queryParameters: queryParameters,
         options: options,
       );
-      // print("res:${res.realUri}");
+      print("res:${res.realUri}");
       client.close();
       // print(res.data);
       if (res.statusCode != 200) {

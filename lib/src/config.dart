@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
@@ -9,8 +11,17 @@ class EConfig {
   static String ns = "test";
   static List<String> mqttServer = ["ws://127.0.0.1:9094/ws"];
   static VoidCallback? onMQTTChanged;
+  static String nameSafetyBond = "保障金";
   static Future<String> Function({String url, CancelToken? cancelToken})?
       diomarkdown;
+  static String getAssetName(String asset) {
+    if (asset.toLowerCase() == "vorcher") {
+      return "点卡";
+    } else if (asset.toLowerCase() == "safetybond") {
+      return nameSafetyBond;
+    }
+    return asset;
+  }
 }
 
 class EColor {
