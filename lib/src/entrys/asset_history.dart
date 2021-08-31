@@ -16,7 +16,7 @@ AssetHistory 资产名字
 @JsonSerializable()
 class AssetHistory {
   @JsonKey(defaultValue: 0)
-  final int iD;
+  final int id;
   @JsonKey(defaultValue: "")
   final String asset;
 
@@ -38,7 +38,7 @@ class AssetHistory {
   @JsonKey(defaultValue: {})
   final Map<String, dynamic> meta;
   AssetHistory({
-    required this.iD,
+    required this.id,
     required this.asset,
     required this.group,
     required this.amount,

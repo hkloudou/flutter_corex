@@ -8,7 +8,7 @@ part of 'asset_history.dart';
 
 AssetHistory _$AssetHistoryFromJson(Map json) {
   return AssetHistory(
-    iD: json['iD'] as int? ?? 0,
+    id: json['id'] as int? ?? 0,
     asset: json['asset'] as String? ?? '',
     group: json['group'] as int? ?? 0,
     amount: json['amount'] as String? ?? '',
@@ -24,7 +24,7 @@ AssetHistory _$AssetHistoryFromJson(Map json) {
 
 Map<String, dynamic> _$AssetHistoryToJson(AssetHistory instance) =>
     <String, dynamic>{
-      'iD': instance.iD,
+      'id': instance.id,
       'asset': instance.asset,
       'group': instance.group,
       'reson': instance.reson,
