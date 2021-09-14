@@ -52,11 +52,13 @@ class MarkDownPage extends StatefulWidget {
   final String content;
   final String title;
   final String url;
+  final bool sign;
 
   MarkDownPage({
     required this.title,
     required this.content,
     this.url = "",
+    this.sign = false,
   });
 
   @override
@@ -146,7 +148,7 @@ class _MarkDownPageState extends State<MarkDownPage> {
       styleSheetTheme: MarkdownStyleSheetBaseTheme.material,
       onTapLink: (String text, String? href, String title) {
         WiseLaunchAdapter.go(context, href!, title.isNotEmpty ? title : text,
-            openInBrowser: true);
+            openInBrowser: true, sign: widget.sign);
       },
       extensionSet: md.ExtensionSet(
         md.ExtensionSet.gitHubFlavored.blockSyntaxes,
@@ -162,7 +164,7 @@ class _MarkDownPageState extends State<MarkDownPage> {
         key: _refreshKey,
         // onRefresh: null,
         onRefresh: () => DioAdapter()
-            .openPage(widget.url, cancelToken: _cancelToken, sign: false)
+            .openPage(widget.url, cancelToken: _cancelToken, sign: widget.sign)
             .catchError((err) {
           if (_refreshKey.currentContext != null) {
             alert(_refreshKey.currentContext!, err.toString(),

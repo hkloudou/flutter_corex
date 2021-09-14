@@ -153,6 +153,14 @@ class DioAdapter {
     }
   }
 
+  String getHost(String api) {
+    var client = _getServer(api);
+    if (client == null) {
+      return "";
+    }
+    return client.options.baseUrl;
+  }
+
   Future<HttpJsonPackage<T>> getRequest<T>(String api, String path,
       {Map<String, dynamic>? queryParameters,
       CancelToken? cancelToken,

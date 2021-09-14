@@ -64,7 +64,7 @@ class WiseLaunchAdapter {
   }
 
   static Future<void> go(BuildContext context, String url, String title,
-      {required bool openInBrowser, bool? replace}) async {
+      {required bool openInBrowser, bool? replace, bool sign = false}) async {
     //md://s.md.replace:1
     if (url.isEmpty) {
       return;
@@ -118,7 +118,8 @@ class WiseLaunchAdapter {
     if (parame.containsKey("s.md.content")) {
       showAnimatePage(
         context,
-        MarkDownPage(title: title, content: parame["s.md.content"] ?? ""),
+        MarkDownPage(
+            title: title, content: parame["s.md.content"] ?? "", sign: sign),
         replace: replace ?? false,
         fullscreenDialog: false,
       );
@@ -129,7 +130,7 @@ class WiseLaunchAdapter {
       //强制使用markdown协议解析网址
       showAnimatePage(
         context,
-        MarkDownPage(title: title, content: "", url: url),
+        MarkDownPage(title: title, content: "", url: url, sign: sign),
         replace: replace ?? false,
         fullscreenDialog: false,
       );
@@ -137,7 +138,7 @@ class WiseLaunchAdapter {
       //针对md结尾的，或者path以md结尾的，也强制转换了算球
       showAnimatePage(
         context,
-        MarkDownPage(title: title, content: "", url: url),
+        MarkDownPage(title: title, content: "", url: url, sign: sign),
         replace: replace ?? false,
         fullscreenDialog: false,
       );
