@@ -11,23 +11,28 @@ import './status/CfgBaseStatus.dart';
 import './status/UserAssetStatus.dart';
 import 'package:provider/provider.dart';
 
-Future<void> _loadUiBoxMqttSubcribe(BuildContext context) {
+Future<void> _loadUiBoxMqttSubcribe(BuildContext context, {bool check = true}) {
   return Future.wait([
     context.read<AuthStatus>().init(),
     context.read<CfgBaseStatus>().init(),
   ])
-      .then((_) => context.read<CfgBaseStatus>().tipUpdate(context)) //提示升级
-      .then((_) => context.read<CfgBaseStatus>().notice(context))
+      .then((_) =>
+          context.read<CfgBaseStatus>().tipUpdate(context, check: check)) //提示升级
+      .then((_) => context.read<CfgBaseStatus>().notice(context, check: check))
       .then((_) {
     context.read<UserAssetStatus>().init();
   });
 }
 
-Future<void> initCoreX(BuildContext context, List<String> mqttUrl,
-    {String? nameSpace,
-    bool? signMarddownRequest,
-    bool useSimpleNotification = true,
-    bool useSimpleBanner = true}) {
+Future<void> initCoreX(
+  BuildContext context,
+  List<String> mqttUrl, {
+  String? nameSpace,
+  bool? signMarddownRequest,
+  bool useSimpleNotification = true,
+  bool useSimpleBanner = true,
+  bool checkUpdate = true,
+}) {
   if (nameSpace != null) {
     EConfig.ns = nameSpace;
   }
@@ -64,7 +69,7 @@ Future<void> initCoreX(BuildContext context, List<String> mqttUrl,
       .then((_) => initDeviceID())
       .then((_) => context.read<AuthStatus>().init())
       .then((_) => MQTTAdapter.init())
-      .then((_) => _loadUiBoxMqttSubcribe(context))
+      .then((_) => _loadUiBoxMqttSubcribe(context, check: checkUpdate))
       .then((_) {
     if (useSimpleNotification) {
       context.read<CfgSimpleNotificationStatus>().init();

@@ -93,8 +93,8 @@ class CfgBaseStatus with ChangeNotifier {
     }
   }
 
-  Future<void> notice(BuildContext context) {
-    if (!ready || !isProductEnv) {
+  Future<void> notice(BuildContext context, {bool check = true}) {
+    if (!ready || !isProductEnv || !check) {
       return Future.value();
     }
     var _stopNotice = _config?.update.stopNotice ?? "";
@@ -109,8 +109,8 @@ class CfgBaseStatus with ChangeNotifier {
     return Future.value();
   }
 
-  Future<void> tipUpdate(BuildContext context) {
-    if (!ready || !isProductEnv) {
+  Future<void> tipUpdate(BuildContext context, {bool check = true}) {
+    if (!ready || !isProductEnv || !check) {
       return Future.value();
     }
     if (hasNewVersion ?? false) {
